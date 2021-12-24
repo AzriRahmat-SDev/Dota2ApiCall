@@ -1,0 +1,6 @@
+.detail-wrap {
+	width: 80%;
+	margin: 4px auto 0;
+	border: 1px solid black;
+	height: calc(100vh - 100px - 70px); /* 100px is from .header  */
+}

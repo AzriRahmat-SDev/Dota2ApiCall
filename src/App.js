@@ -1,5 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import CardList from './components/CardList';
+import CardDetailWrap from './components/CardDetailWrap';
+import Header from './components/Header';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 
 class App extends Component {
@@ -14,7 +17,9 @@ class App extends Component {
 	componentDidMount() {
 		fetch('https://api.opendota.com/api/heroStats')
 			.then((response) => response.json())
-			.then((data) => this.setState({ heroes: data, isLoaded: true }));
+			.then((data) => {
+				this.setState({ heroes: data, isLoaded: true });
+			});
 	}
 
 	render() {
@@ -24,9 +29,22 @@ class App extends Component {
 			return <div>is loading</div>;
 		}
 		return (
-			<div className="heroes" id="heroes">
-				<CardList heroes={heroes} />
-			</div>
+			<Fragment>
+				<Router>
+					<Header />
+					<Routes>
+						<Route
+							path="/heroes/*"
+							element={<CardDetailWrap heroes={heroes} />}
+						></Route>
+						<Route
+							path="/"
+							exact
+							element={<CardList heroes={heroes} />}
+						></Route>
+					</Routes>
+				</Router>
+			</Fragment>
 		);
 	}
 }

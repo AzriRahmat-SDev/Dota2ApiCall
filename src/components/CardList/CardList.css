@@ -1,0 +1,7 @@
+.cards-list {
+	width: 80%;
+	margin: 4px auto 0;
+	border: 1px solid black;
+	height: 100vh;
+	overflow: scroll;
+}
